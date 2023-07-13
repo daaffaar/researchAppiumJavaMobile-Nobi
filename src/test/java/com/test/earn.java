@@ -1,4 +1,4 @@
-package com.test;
+ package com.test;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.TouchAction;
@@ -27,8 +27,6 @@ public class earn {
 
     @Test
     public void HideAndUnhideBalanceOnEarnPage() throws MalformedURLException, InterruptedException {
-
-        base.LaunchTest();
         UiAutomator2Options options = new UiAutomator2Options();
         AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), options);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
@@ -110,7 +108,7 @@ public class earn {
         AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), options);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
 
-        driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup"))).click();
         Thread.sleep(10000);
         driver.pressKey(new KeyEvent(AndroidKey.BACK));
 
@@ -118,12 +116,90 @@ public class earn {
 
     @Test
     public void CoinDetailPage() throws MalformedURLException, InterruptedException {
+        base.LaunchTest();
+        UiAutomator2Options options = new UiAutomator2Options();
+        AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), options);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        double principal = 100;
+        double apy = 5;
+        double time6Months = 0.5;
+        double time1Year = 1;
+        String expectedMinimumAdd = "0.25";
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='DOT']")))
+                .click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.EditText[@text='123456']"))).sendKeys("100");
+
+        WebElement interest6Month = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView[5]")));
+        String expectedInterest6Month = interest6Month.getText();
+        String[] splitInterest6Month = expectedInterest6Month.split(" ");
+        String resultSplitInterest6Month= splitInterest6Month[0];
+
+        WebElement interest1Year = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.widget.TextView[6]")));
+        String expectedInterest1Year = interest1Year.getText();
+        String[] splitInterest1Year= expectedInterest1Year.split(" ");
+        String resultSplitInterest1Year = splitInterest1Year[0];
+
+        double actualInterest6Month = principal * (apy / 100) * time6Months;
+        String actualInterest6MonthConvert = actualInterest6Month  % 1 == 0 ? String.format("%.0f", actualInterest6Month) : String.valueOf(actualInterest6Month);
+        Assert.assertEquals(actualInterest6MonthConvert, resultSplitInterest6Month);
+
+        double actualInterest1Year = principal * (apy / 100) * time1Year;
+        String actualInterest1YearConvert = actualInterest1Year  % 1 == 0 ? String.format("%.0f", actualInterest1Year) : String.valueOf(actualInterest1Year);
+        Assert.assertEquals(actualInterest1YearConvert, resultSplitInterest1Year);
+
+        WebElement minimumAdd = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("\t\n" +
+                "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[3]/android.widget.TextView[2]")));
+        String actualMinimumAdd = minimumAdd.getText();
+        String[] splitMinimumAdd= actualMinimumAdd.split(" ");
+        String resultSplitMinimumAdd = splitMinimumAdd[0];
+
+        Assert.assertEquals(expectedMinimumAdd, resultSplitMinimumAdd);
+
+        WebElement element4 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='ADD']")));
+        String actualText4 = element4.getText();
+        String expectedText4 = "ADD";
+        Assert.assertEquals(expectedText4, actualText4);
+
+        WebElement element5 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='REMOVE']")));
+        String actualText5 = element5.getText();
+        String expectedText5 = "REMOVE";
+        Assert.assertEquals(expectedText5, actualText5);
+        System.out.println("berhasil");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("\t\n" +
+                "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup"))).click();
+
+    }
+
+    @Test
+    public void PortfolioPage() throws MalformedURLException, InterruptedException {
         UiAutomator2Options options = new UiAutomator2Options();
         AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), options);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='BTC']")))
-                .click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Earn Portfolio']"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.TextView[2]"))).click();
+        WebElement elements1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='*****']")));
+        String texts1 = elements1.getText();
+
+        if (texts1.equals("*****")) {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.TextView[2]")))
+                    .click();
+            System.out.println("Hide dan Unhide Balance berhasil");
+        } else {
+            System.out.println("Hide dan Unhide Balance tidak berhasil");
+        }
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("\t\n" +
+                "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='I UNDERSTAND']"))).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("\t\n" +
+                "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.widget.ScrollView/android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[4]/android.view.ViewGroup[1]/android.view.ViewGroup"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='I UNDERSTAND']"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("\t\n" +
+                "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup"))).click();
 
     }
+
 }
