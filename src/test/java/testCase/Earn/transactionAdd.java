@@ -23,14 +23,14 @@ public class transactionAdd {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
 
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='BTC']")))
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='DOT']")))
                 .click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='ADD']")))
                 .click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='CONTINUE']")))
                 .click();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.EditText[@content-desc='idInputAmount']"))).sendKeys("0.0001");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.EditText[@content-desc='idInputAmount']"))).sendKeys("0.25");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='ADD']")))
                 .click();
 
@@ -38,14 +38,14 @@ public class transactionAdd {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Add Confirmed']")));
 
-        WebElement elements1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='0.0001 BTC']")));
+        WebElement elements1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='0.25 DOT']")));
         String actualText1 = elements1.getText();
-        String expectedText1 = "0.0001 BTC";
+        String expectedText1 = "0.25 DOT";
         Assert.assertEquals(expectedText1, actualText1);
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Added Amount']")));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Payment Method']")));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Wallet (BTC)']")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Wallet (DOT)']")));
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='RETURN TO EARN']"))).click();
     }
@@ -56,20 +56,20 @@ public class transactionAdd {
         AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), options);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='BTC']")))
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='DOT']")))
                 .click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='ADD']")))
                 .click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='CONTINUE']")))
                 .click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.EditText[@content-desc='idInputAmount']"))).sendKeys("0.000001");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.EditText[@content-desc='idInputAmount']"))).sendKeys("0.1");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='ADD']")))
                 .click();
-        WebElement elements1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='The minimum amount to Add Assets is 0.0001 BTC']")));
+        WebElement elements1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='The minimum amount to Add Assets is 0.25 DOT']")));
         String texts1 = elements1.getText();
 
         try {
-            if (texts1.equals("The minimum amount to Add Assets is 0.0001 BTC")) {
+            if (texts1.equals("The minimum amount to Add Assets is 0.25 DOT")) {
                 System.out.println("berhasil verify error message");
             }
         }
@@ -88,7 +88,7 @@ public class transactionAdd {
         AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), options);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.EditText[@text='0.000001']"))).sendKeys("1500");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.EditText[@text='0.1']"))).sendKeys("1500");
 
         WebElement element1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='ADD']")));
         String actualText1 = element1.getText();

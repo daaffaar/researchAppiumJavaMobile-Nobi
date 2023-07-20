@@ -22,7 +22,7 @@ public class transactionRemove {
         AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), options);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='BTC']")))
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='DOT']")))
                 .click();
         Thread.sleep(2000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='REMOVE']")))
@@ -41,22 +41,22 @@ public class transactionRemove {
         AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), options);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.EditText[@text='10']"))).sendKeys("0.000001");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.EditText[@text='10']"))).sendKeys("0.1");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='REMOVE']")))
                 .click();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Remove Amount']")));
 
-        WebElement elements1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='0.000001 BTC']")));
+        WebElement elements1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='0.1 DOT']")));
         String actualText1 = elements1.getText();
-        String expectedText1 = "0.000001 BTC";
+        String expectedText1 = "0.1 DOT";
         Assert.assertEquals(expectedText1, actualText1);
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Payment Method']")));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Earn (Bitcoin)']")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Earn (Polkadot)']")));
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Total Amount']")));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='0.000001 BTC']")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='0.1 DOT']")));
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='CONFIRM(15)']"))).click();
 
@@ -64,13 +64,13 @@ public class transactionRemove {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Remove Confirmed']")));
 
-        WebElement elements2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='0.000001 BTC']")));
+        WebElement elements2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='0.1 DOT']")));
         String actualText2 = elements2.getText();
-        String expectedText2 = "0.000001 BTC";
+        String expectedText2 = "0.1 DOT";
         Assert.assertEquals(expectedText2, actualText2);
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='From']")));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Earn (Bitcoin)']")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Earn (Polkadot)']")));
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='RETURN TO EARN']"))).click();
     }

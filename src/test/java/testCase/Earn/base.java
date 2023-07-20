@@ -20,20 +20,22 @@ public class base {
         options.setPlatformName("Android");
         options.setAutomationName(AutomationName.ANDROID_UIAUTOMATOR2);
         options.setDeviceName("Daffa_Emu");
-        options.setApp("D://New GIT//nobi-automation-katalon-mobile-android//androidapp//Nobi_Staging_base.apk");
-        options.setNoReset(true);
+        options.setApp("D://New GIT//nobi-automation-katalon-mobile-android//androidapp//Nobi_Dev_base.apk");
+        options.setNoReset(false);
 
         AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), options);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
 
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='CONTINUE']"))).click();
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Get Started']"))).click();
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Continue with Email']"))).click();
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.EditText[@text='Example@address.com']")))
-//                .sendKeys("proearn1.tes@mailinator.com");
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.EditText[@text='#Example01']")))
-//                .sendKeys("Pass@word3");
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Continue']"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='CONTINUE']"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Get Started']"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Continue with Email']"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.EditText[@text='example@address.com']")))
+                .sendKeys("user001@mailinator.com");
+        driver.hideKeyboard();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Continue']"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.EditText[@text='#Example01']")))
+                .sendKeys("Pass@word3");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Continue']"))).click();
 
         for (int i = 1; i <= 6; i++) {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//android.widget.TextView[@text='0'])[7]"))).click();
