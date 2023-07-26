@@ -13,7 +13,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 
-public class transactionRemove {
+public class transactionRemoveEarnPage {
 
     @Test(priority = 1)
     public void FailedRemoveEarnMoreThanBalanceViaEarnPage() throws MalformedURLException, InterruptedException {

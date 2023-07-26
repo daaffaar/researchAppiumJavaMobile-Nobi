@@ -13,7 +13,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 
-public class transactionAdd {
+public class transactionAddEarnPage {
 
     @Test(priority = 1)
     public void SuccessAddEarnViaEarnPage() throws MalformedURLException, InterruptedException {
@@ -89,6 +89,8 @@ public class transactionAdd {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.EditText[@text='0.1']"))).sendKeys("1500");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='ADD']")))
+                .click();
 
         WebElement element1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='ADD']")));
         String actualText1 = element1.getText();
