@@ -21,26 +21,33 @@ public class base {
         options.setAutomationName(AutomationName.ANDROID_UIAUTOMATOR2);
         options.setDeviceName("Daffa_Emu");
         options.setApp("D://New GIT//nobi-automation-katalon-mobile-android//androidapp//Nobi_Dev_base.apk");
-        options.setNoReset(true);
+        options.setNoReset(false);
 
         AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), options);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='CONTINUE']"))).click();
+        System.out.println("sukses click button continue");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Get Started']"))).click();
+        System.out.println("sukses click get started");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Continue with Email']"))).click();
+        System.out.println("sukses click button login with email");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.EditText[@text='example@address.com']")))
                 .sendKeys("user001@mailinator.com");
+        System.out.println("sukses input email");
         driver.hideKeyboard();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Continue']"))).click();
+        System.out.println("sukses click button continue");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.EditText[@text='#Example01']")))
                 .sendKeys("Pass@word3");
+        System.out.println("sukses input password");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.widget.TextView[@text='Continue']"))).click();
 
         for (int i = 1; i <= 6; i++) {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//android.widget.TextView[@text='0'])[7]"))).click();
         }
-
+        System.out.println("sukses input pin");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//android.view.View[@resource-id='bottom-tab-bar-earn-testId']"))).click();
+        System.out.println("sukses click tab earn");
     }
 }
